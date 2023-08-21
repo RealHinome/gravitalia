@@ -1,0 +1,7 @@
+# Define port for the GraphQL API
+port: 8888
+
+database:
+  memcached:
+    hosts:
+      - 127.0.0.1:11211
