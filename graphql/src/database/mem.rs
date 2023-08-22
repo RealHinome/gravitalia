@@ -2,17 +2,61 @@ use anyhow::Result;
 use r2d2::Pool;
 use r2d2_memcache::MemcacheConnectionManager;
 
-/// Represents pool connection type
-pub type MemPool = Pool<MemcacheConnectionManager>;
-
-/// SetValue is used to define a value in memcached using a string or a number.
+/// Represents the value to be stored in Memcached, which can be either a string or a number.
 pub enum SetValue {
+    /// Stores a value as a string of characters.
     Characters(String),
+    /// Stores a value as a 16-bit unsigned number.
     Number(u16),
 }
 
-/// Inits memcached database connection
-pub fn init(config: &crate::model::config::Config) -> Result<MemPool> {
+/// Define a structure to manage the Memcached connection pool.
+pub struct MemPool {
+    pub connection: Pool<MemcacheConnectionManager>,
+}
+
+/// Define a trait for the MemcacheManager with methods to interact with Memcached.
+pub trait MemcacheManager {
+    /// Get data from a given key.
+    fn get(&self, key: String) -> Result<Option<String>>;
+    /// Set data in Memcached and return the key.
+    fn set(&self, key: String, value: SetValue) -> Result<String>;
+    /// Delete data based on the key.
+    fn del(&self, key: String) -> Result<()>;
+}
+
+impl MemcacheManager for MemPool {
+    /// Retrieve data from Memcached based on the key.
+    fn get(&self, key: String) -> Result<Option<String>> {
+        Ok(self.connection.get()?.get(&key)?)
+    }
+
+    /// Store data in Memcached and return the key.
+    fn set(&self, key: String, value: SetValue) -> Result<String> {
+        match value {
+            SetValue::Characters(data) => {
+                self.connection.get()?.set(&key, data, 300)?;
+            }
+            SetValue::Number(data) => {
+                self.connection.get()?.set(&key, data, 300)?;
+            }
+        };
+
+        Ok(key)
+    }
+
+    /// Delete data from Memcached based on the key.
+    fn del(&self, key: String) -> Result<()> {
+        self.connection.get()?.delete(&key)?;
+
+        Ok(())
+    }
+}
+
+/// Initialize the connection pool for Memcached.
+pub fn init(
+    config: &crate::model::config::Config,
+) -> Result<Pool<MemcacheConnectionManager>> {
     let manager = r2d2_memcache::MemcacheConnectionManager::new(format!(
         "memcache://{}?timeout=2&use_udp=true",
         config.database.memcached.hosts[0]
@@ -26,32 +70,4 @@ pub fn init(config: &crate::model::config::Config) -> Result<MemPool> {
         )
         .min_idle(Some(2))
         .build(manager)?)
-}
-
-/// Set data into memcached, and then, returns the key
-pub fn set(pool: &MemPool, key: String, value: SetValue) -> Result<String> {
-    match value {
-        SetValue::Characters(data) => {
-            pool.get()?.set(&key, data, 300)?;
-        }
-        SetValue::Number(data) => {
-            pool.get()?.set(&key, data, 300)?;
-        }
-    };
-
-    Ok(key)
-}
-
-/// This functions allows to get data from a key
-pub fn get(pool: &MemPool, key: String) -> Result<Option<String>> {
-    let value: Option<String> = pool.get()?.get(&key)?;
-
-    Ok(value)
-}
-
-/// This function allows to delete data based on the key
-pub fn del(pool: &MemPool, key: String) -> Result<()> {
-    pool.get()?.delete(&key)?;
-
-    Ok(())
 }
