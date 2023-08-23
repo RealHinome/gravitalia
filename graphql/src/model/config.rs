@@ -9,6 +9,8 @@ pub struct Connection {
     pub password: Option<String>,
     /// A list of host addresses for the database connection.
     pub hosts: Vec<String>,
+    /// Number of pool created for database.
+    pub pool_size: u32,
 }
 
 /// Represents the connection details for the databases.
