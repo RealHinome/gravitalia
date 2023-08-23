@@ -5,3 +5,4 @@ database:
   memcached:
     hosts:
       - 127.0.0.1:11211
+    pool_size: 10
