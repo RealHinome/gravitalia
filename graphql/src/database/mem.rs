@@ -2,6 +2,7 @@ use anyhow::Result;
 use r2d2::Pool;
 use r2d2_memcache::MemcacheConnectionManager;
 
+#[allow(dead_code)]
 /// Represents the value to be stored in Memcached, which can be either a string or a number.
 pub enum SetValue {
     /// Stores a value as a string of characters.
@@ -10,6 +11,7 @@ pub enum SetValue {
     Number(u16),
 }
 
+#[derive(Clone, Debug)]
 /// Define a structure to manage the Memcached connection pool.
 pub struct MemPool {
     pub connection: Pool<MemcacheConnectionManager>,
@@ -18,36 +20,36 @@ pub struct MemPool {
 /// Define a trait for the MemcacheManager with methods to interact with Memcached.
 pub trait MemcacheManager {
     /// Get data from a given key.
-    fn get(&self, key: String) -> Result<Option<String>>;
+    fn get<T: ToString>(&self, key: T) -> Result<Option<String>>;
     /// Set data in Memcached and return the key.
-    fn set(&self, key: String, value: SetValue) -> Result<String>;
+    fn set<T: ToString>(&self, key: T, value: SetValue) -> Result<String>;
     /// Delete data based on the key.
-    fn del(&self, key: String) -> Result<()>;
+    fn del<T: ToString>(&self, key: T) -> Result<()>;
 }
 
 impl MemcacheManager for MemPool {
     /// Retrieve data from Memcached based on the key.
-    fn get(&self, key: String) -> Result<Option<String>> {
-        Ok(self.connection.get()?.get(&key)?)
+    fn get<T: ToString>(&self, key: T) -> Result<Option<String>> {
+        Ok(self.connection.get()?.get(&key.to_string())?)
     }
 
     /// Store data in Memcached and return the key.
-    fn set(&self, key: String, value: SetValue) -> Result<String> {
+    fn set<T: ToString>(&self, key: T, value: SetValue) -> Result<String> {
         match value {
             SetValue::Characters(data) => {
-                self.connection.get()?.set(&key, data, 300)?;
+                self.connection.get()?.set(&key.to_string(), data, 300)?;
             }
             SetValue::Number(data) => {
-                self.connection.get()?.set(&key, data, 300)?;
+                self.connection.get()?.set(&key.to_string(), data, 300)?;
             }
         };
 
-        Ok(key)
+        Ok(key.to_string())
     }
 
     /// Delete data from Memcached based on the key.
-    fn del(&self, key: String) -> Result<()> {
-        self.connection.get()?.delete(&key)?;
+    fn del<T: ToString>(&self, key: T) -> Result<()> {
+        self.connection.get()?.delete(&key.to_string())?;
 
         Ok(())
     }
