@@ -1,59 +1,61 @@
-use crate::{database::mem::MemcacheManager, model::user::User};
+use crate::{
+    database::mem::{MemPool, MemcacheManager},
+    model::user::User,
+};
 use juniper::{graphql_object, EmptyMutation, EmptySubscription, RootNode};
 
 /// Define the context for your GraphQL schema.
 #[derive(Clone, Debug)]
 pub struct Context {
-    pub memcached: crate::database::mem::MemPool,
+    /// Pool of connections to the Memcached database.
+    pub memcached: MemPool,
 }
 impl juniper::Context for Context {}
 
 /// Implement the GraphQL object for the User struct.
 #[graphql_object(context = Context, description = "Information about a user")]
 impl User {
-    #[graphql(description = "Unique user identifier.")]
+    /// Returns the unique user identifier.
     fn vanity(&self) -> &str {
         &self.vanity
     }
 
-    #[graphql(
-        description = "User's pseudonym, could be also firstname and lastname."
-    )]
+    /// Returns the user's pseudonym, which could also be their first name and last name.
     fn username(&self) -> &str {
         &self.username
     }
 
-    #[graphql(description = "Count of other users that follow the user.")]
+    /// Returns the count of other users that follow the user.
     fn followers(&self) -> i32 {
         self.followers
     }
 
-    #[graphql(description = "Count of accounts that the user is following.")]
+    /// Returns the count of accounts that the user is following.
     fn following(&self) -> i32 {
         self.following
     }
 
-    #[graphql(description = "Hash representing the user's avatar image.")]
+    /// Returns a hash representing the user's avatar image.
     fn avatar(&self) -> Option<String> {
         self.avatar.clone()
     }
 
-    #[graphql(description = "Biography or description of the user.")]
+    /// Returns the biography or description of the user.
     fn bio(&self) -> Option<String> {
         self.bio.clone()
     }
 
-    #[graphql(description = "Total count of posts made by the user.")]
+    /// Returns the total count of posts made by the user.
     fn posts_count(&self) -> i32 {
         self.posts_count
     }
 
-    #[graphql(description = "Bitmask representing various user flags.")]
+    /// Returns a bitmask representing various user flags.
     fn flags(&self) -> i32 {
         self.flags
     }
 
-    #[graphql(description = "List of post content created by the user.")]
+    /// Returns a list of post content created by the user.
     fn posts(&self) -> Vec<String> {
         vec![]
     }
