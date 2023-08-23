@@ -1,9 +1,11 @@
-use crate::model::user::User;
+use crate::{database::mem::MemcacheManager, model::user::User};
 use juniper::{graphql_object, EmptyMutation, EmptySubscription, RootNode};
 
 /// Define the context for your GraphQL schema.
-#[derive(Clone, Copy, Debug)]
-pub struct Context;
+#[derive(Clone, Debug)]
+pub struct Context {
+    pub memcached: crate::database::mem::MemPool,
+}
 impl juniper::Context for Context {}
 
 /// Implement the GraphQL object for the User struct.
@@ -65,7 +67,9 @@ pub struct Query;
 #[graphql_object(context = Context)]
 impl Query {
     /// Define an asynchronous method to retrieve a user by vanity
-    async fn get_user(vanity: String) -> User {
+    async fn get_user(context: &Context, vanity: String) -> User {
+        println!("{:?}", context.memcached.get("test").unwrap());
+
         User {
             vanity,
             username: "Test".to_string(),

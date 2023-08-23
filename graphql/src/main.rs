@@ -38,12 +38,14 @@ async fn main() {
     let config = helpers::config::read();
 
     // Start databases
-    let _memcached_pool = database::mem::MemPool {
+    let memcached_pool = database::mem::MemPool {
         connection: database::mem::init(&config).unwrap(),
     };
 
     // Create a warp filter for GraphQL context
-    let state = warp::any().map(|| graphql::user::Context);
+    let state = warp::any().map(move || graphql::user::Context {
+        memcached: memcached_pool.clone(),
+    });
 
     // Create a filter for the main GraphQL endpoint
     let graphql_filter = juniper_warp::make_graphql_filter(
