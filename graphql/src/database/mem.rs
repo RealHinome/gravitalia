@@ -1,9 +1,10 @@
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use r2d2::Pool;
 use r2d2_memcache::MemcacheConnectionManager;
 
-#[allow(dead_code)]
 /// Represents the value to be stored in Memcached, which can be either a string or a number.
+#[allow(dead_code)]
+#[derive(Debug, Clone)]
 pub enum SetValue {
     /// Stores a value as a string of characters.
     Characters(String),
@@ -11,10 +12,10 @@ pub enum SetValue {
     Number(u16),
 }
 
-#[derive(Clone, Debug)]
 /// Define a structure to manage the Memcached connection pool.
+#[derive(Clone, Debug)]
 pub struct MemPool {
-    pub connection: Pool<MemcacheConnectionManager>,
+    pub connection: Option<Pool<MemcacheConnectionManager>>,
 }
 
 /// Define a trait for the MemcacheManager with methods to interact with Memcached.
@@ -24,32 +25,91 @@ pub trait MemcacheManager {
     /// Set data in Memcached and return the key.
     fn set<T: ToString>(&self, key: T, value: SetValue) -> Result<String>;
     /// Delete data based on the key.
-    fn del<T: ToString>(&self, key: T) -> Result<()>;
+    fn delete<T: ToString>(&self, key: T) -> Result<()>;
 }
 
 impl MemcacheManager for MemPool {
     /// Retrieve data from Memcached based on the key.
     fn get<T: ToString>(&self, key: T) -> Result<Option<String>> {
-        Ok(self.connection.get()?.get(&key.to_string())?)
+        let connection = self
+            .connection
+            .as_ref()
+            .ok_or_else(|| anyhow!("No connection pool"))?
+            .get()
+            .map_err(|error| {
+                log::error!("Error while getting connection: {:?}", error);
+                error
+            })?;
+
+        connection
+            .get(&key.to_string())
+            .map(|data| {
+                log::trace!("Cache data got with key {}", key.to_string());
+                data
+            })
+            .map_err(|error| {
+                log::error!("Error while retrieving data: {:?}", error);
+                error.into()
+            })
     }
 
     /// Store data in Memcached and return the key.
     fn set<T: ToString>(&self, key: T, value: SetValue) -> Result<String> {
-        match value {
+        let connection = self
+            .connection
+            .as_ref()
+            .ok_or_else(|| anyhow!("No connection pool"))?
+            .get()
+            .map_err(|error| {
+                log::error!("Error while getting connection: {:?}", error);
+                error
+            })?;
+
+        let result = match value.clone() {
             SetValue::Characters(data) => {
-                self.connection.get()?.set(&key.to_string(), data, 300)?;
+                connection.set(&key.to_string(), data, 300)
             }
             SetValue::Number(data) => {
-                self.connection.get()?.set(&key.to_string(), data, 300)?;
+                connection.set(&key.to_string(), data, 300)
             }
         };
 
-        Ok(key.to_string())
+        result
+            .map(move |_| {
+                log::trace!(
+                    "Cache data set with key {} and content as {:?}",
+                    key.to_string(),
+                    value
+                );
+                key.to_string()
+            })
+            .map_err(|error| {
+                log::error!("Error while setting data: {:?}", error);
+                error.into()
+            })
     }
 
     /// Delete data from Memcached based on the key.
-    fn del<T: ToString>(&self, key: T) -> Result<()> {
-        self.connection.get()?.delete(&key.to_string())?;
+    fn delete<T: ToString>(&self, key: T) -> Result<()> {
+        let connection = self
+            .connection
+            .as_ref()
+            .ok_or_else(|| anyhow!("No connection pool"))?
+            .get()
+            .map_err(|error| {
+                log::error!("Error while getting connection: {:?}", error);
+                error
+            })?;
+
+        connection
+            .delete(&key.to_string())
+            .map(move |_| {
+                log::trace!("Cache deleted with key {}", key.to_string());
+            })
+            .map_err(|error| {
+                log::error!("Error while deleting data: {:?}", error);
+                error
+            })?;
 
         Ok(())
     }
@@ -65,11 +125,7 @@ pub fn init(
     ));
 
     Ok(r2d2_memcache::r2d2::Pool::builder()
-        .max_size(
-            std::env::var("MEMCACHED_POOL_SIZE")
-                .unwrap_or_else(|_| "10".to_string())
-                .parse::<u32>()?,
-        )
+        .max_size(config.database.memcached.pool_size)
         .min_idle(Some(2))
         .build(manager)?)
 }
