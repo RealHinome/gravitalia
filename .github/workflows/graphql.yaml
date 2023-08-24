@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up cargo cache
       uses: actions/cache@v3
       continue-on-error: false
@@ -28,9 +28,11 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
         restore-keys: ${{ runner.os }}-cargo
-        
+
     - name: Build
+      working-directory: ./graphql
       run: cargo build
-      
+
     - name: Test
+      working-directory: ./graphql
       run: cargo test
