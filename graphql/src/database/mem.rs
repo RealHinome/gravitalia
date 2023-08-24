@@ -15,6 +15,7 @@ pub enum SetValue {
 /// Define a structure to manage the Memcached connection pool.
 #[derive(Clone, Debug)]
 pub struct MemPool {
+    /// Optional pool of Memcached connections.
     pub connection: Option<Pool<MemcacheConnectionManager>>,
 }
 
