@@ -50,7 +50,7 @@ async fn main() {
             // In the event that establishing a connections pool encounters any difficulties, it will be duly logged.
             // Such a scenario might lead to suboptimal performance in specific requests, like retrieving follower counts for highly connected users,
             // or fetching likes on posts from those with extensive connections.
-            // It will also desactivate states in Outh requests, which is a precautionary measure against potential CSRF attacks.
+            // It will also desactivate states in OAuth requests, which is a precautionary measure against potential CSRF attacks.
             log::warn!("Cannot initialize Memcached pool, this could result in poor performance: {}", error);
 
             database::mem::MemPool { connection: None }
