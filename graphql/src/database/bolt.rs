@@ -18,8 +18,8 @@ impl BoltManager for Bolt {}
 pub async fn init(config: crate::model::config::Config) -> Result<Arc<Graph>> {
     let bolt_config = ConfigBuilder::default()
         .uri(config.database.bolt.hosts[0].clone())
-        .user(config.database.bolt.username.unwrap_or("".to_string()))
-        .password(config.database.bolt.password.unwrap_or("".to_string()))
+        .user(config.database.bolt.username.unwrap_or_else(|| "".to_string()))
+        .password(config.database.bolt.password.unwrap_or_else(|| "".to_string()))
         .max_connections(
             config
                 .database
