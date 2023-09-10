@@ -18,6 +18,8 @@ pub struct Connection {
 pub struct Database {
     /// The connection details for memcached.
     pub memcached: Connection,
+    /// The connection details for Neo4j or Memgraph.
+    pub bolt: Connection,
 }
 
 /// Represents the configuration structure expected from the 'config.yaml' file.
