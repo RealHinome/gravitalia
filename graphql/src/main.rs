@@ -37,7 +37,24 @@ async fn main() {
     // Read configuration file
     let config = helpers::config::read();
 
-    // Start databases
+    // Initialize databases
+    let bolt_pool = match database::bolt::init(config.clone()).await {
+        Ok(pool) => {
+            log::info!("Neo4j/Memgraph connection created successfully.");
+
+            database::bolt::Bolt { connection: pool }
+        }
+        Err(error) => {
+            // A failure to establish a connection to Neo4j or Memgraph is considered fatal,
+            // rendering the API unusable.
+            log::error!(
+                "Cannot initialize Neo4j or Memgraph connection: {}",
+                error
+            );
+            std::process::exit(0);
+        }
+    };
+
     let memcached_pool = match database::mem::init(&config) {
         Ok(pool) => {
             log::info!("Memcached pool connection created successfully.");
@@ -50,7 +67,7 @@ async fn main() {
             // In the event that establishing a connections pool encounters any difficulties, it will be duly logged.
             // Such a scenario might lead to suboptimal performance in specific requests, like retrieving follower counts for highly connected users,
             // or fetching likes on posts from those with extensive connections.
-            // It will also desactivate states in OAuth requests, which is a precautionary measure against potential CSRF attacks.
+            // It will also desactivate states in Outh requests, which is a precautionary measure against potential CSRF attacks.
             log::warn!("Cannot initialize Memcached pool, this could result in poor performance: {}", error);
 
             database::mem::MemPool { connection: None }
@@ -60,6 +77,7 @@ async fn main() {
     // Create a warp filter for GraphQL context
     let state = warp::any().map(move || graphql::user::Context {
         memcached: memcached_pool.clone(),
+        bolt: bolt_pool.clone(),
     });
 
     // Create a filter for the main GraphQL endpoint
