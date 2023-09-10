@@ -1,19 +1,24 @@
 use crate::{
-    database::mem::{MemPool, MemcacheManager},
+    database::{
+        bolt::Bolt,
+        mem::{MemPool, MemcacheManager},
+    },
     model::user::User,
 };
 use juniper::{graphql_object, EmptyMutation, EmptySubscription, RootNode};
 
 /// Define the context for your GraphQL schema.
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct Context {
     /// Pool of connections to the Memcached database.
     pub memcached: MemPool,
+    /// Pool of connections to the Neo4j or Memgraph databases using Bolt protocol.
+    pub bolt: Bolt,
 }
 impl juniper::Context for Context {}
 
 /// Implement the GraphQL object for the User struct.
-#[graphql_object(context = Context, description = "Information about a user")]
+#[graphql_object(context = Context, description = "Information about a user.")]
 impl User {
     /// Returns the unique user identifier.
     fn vanity(&self) -> &str {
