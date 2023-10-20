@@ -1,16 +1,16 @@
 load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
-#load("@rules_rust//proto/protobuf:defs.bzl", "rust_grpc_library")
+load("@rules_rust//proto/protobuf:defs.bzl", "rust_proto_library")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_test")
 
-#proto_library(
-#    name = "torresix",
-#    srcs = ["proto/torresix.proto"]
-#)
+proto_library(
+    name = "torresix",
+    srcs = ["proto/torresix.proto"]
+)
 
-#rust_grpc_library(
-#    name = "rust",
-#    deps = [":torresix"],
-#)
+rust_proto_library(
+    name = "rust_torresix",
+    deps = [":torresix"],
+)
 
 package(default_visibility = ["//visibility:public"])
 
@@ -18,11 +18,24 @@ rust_binary(
     name = "graphql",
     srcs = glob(["src/**/*.rs"]),
     aliases = aliases(),
-    deps = all_crate_deps(
+    deps = [
+        #":rust_torresix",
+    ] + all_crate_deps(
         normal = True,
     ),
     proc_macro_deps = all_crate_deps(
         proc_macro = True,
     ),
     visibility = ["//visibility:public"],
+)
+
+rust_test(
+    name = "graphql_test",
+    crate = ":graphql",
+    deps = all_crate_deps(
+        normal = True,
+    ),
+    proc_macro_deps = all_crate_deps(
+        proc_macro = True,
+    ),
 )
