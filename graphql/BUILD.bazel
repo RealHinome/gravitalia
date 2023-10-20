@@ -1,16 +1,16 @@
 load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
-load("@rules_rust//proto/protobuf:defs.bzl", "rust_proto_library")
+#load("@rules_rust//proto/protobuf:defs.bzl", "rust_proto_library")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_test")
 
-proto_library(
-    name = "torresix",
-    srcs = ["proto/torresix.proto"]
-)
+#proto_library(
+#    name = "torresix",
+#    srcs = ["proto/torresix.proto"]
+#)
 
-rust_proto_library(
-    name = "rust_torresix",
-    deps = [":torresix"],
-)
+#rust_proto_library(
+#    name = "rust_torresix",
+#    deps = [":torresix"],
+#)
 
 package(default_visibility = ["//visibility:public"])
 
