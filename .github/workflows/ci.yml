@@ -29,19 +29,3 @@ jobs:
     - name: Run tests
       run: bazel test //...
       shell: bash
-
-  nix:
-    strategy:
-      matrix:
-        include:
-        - target: ubuntu-latest
-          name: Linux Ubuntu
-    name: Build (${{ matrix.name || matrix.target }})
-    runs-on: ${{ matrix.target }}
-    steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v22
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-    - run: nix-shell --command nix-build
-      working-directory: ./graphql
