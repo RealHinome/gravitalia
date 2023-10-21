@@ -8,4 +8,10 @@ pkgs.rustPlatform.buildRustPackage rec {
     version = "0.1";
     cargoLock.lockFile = ./Cargo.lock;
     src = pkgs.lib.cleanSource ./.;
+    buildInputs = with pkgs; [
+      darwin.apple_sdk.frameworks.Security
+      openssl_3
+      protobuf
+      pkg-config
+    ];
 }
