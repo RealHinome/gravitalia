@@ -1,1 +1,7 @@
 licenses(["notice"]) # MPL-2.0
+
+# rules_js
+load("@npm//:defs.bzl", "npm_link_all_packages")
+npm_link_all_packages(
+    name = "node_modules"
+)
