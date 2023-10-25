@@ -2,3 +2,7 @@
 members = [
     "graphql",
 ]
+exclude = [
+    "autha",
+    "front",
+]
