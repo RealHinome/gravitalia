@@ -70,7 +70,7 @@ load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
 
 nodejs_register_toolchains(
     name = "nodejs",
-    node_version = "20.9.0",
+    node_version = "18.8.0",
 )
 
 load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
@@ -78,15 +78,29 @@ load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 npm_translate_lock(
     name = "npm",
     data = [
-        "//front:package.json"
+        "//front:package.json",
     ],
     pnpm_lock = "//:pnpm-lock.yaml",
-    verify_node_modules_ignored = "//:.bazelignore"
+    verify_node_modules_ignored = "//:.bazelignore",
 )
 
 load("@npm//:repositories.bzl", "npm_repositories")
 
 npm_repositories()
+
+# Add rules_ts
+http_archive(
+    name = "aspect_rules_ts",
+    sha256 = "8aabb2055629a7becae2e77ae828950d3581d7fc3602fe0276e6e039b65092cb",
+    strip_prefix = "rules_ts-2.0.0",
+    url = "https://github.com/aspect-build/rules_ts/releases/download/v2.0.0/rules_ts-v2.0.0.tar.gz",
+)
+
+load("@aspect_rules_ts//ts:repositories.bzl", "LATEST_TYPESCRIPT_VERSION", "rules_ts_dependencies")
+
+rules_ts_dependencies(
+    ts_version = LATEST_TYPESCRIPT_VERSION,
+)
 
 # Add rules_oci
 http_archive(
