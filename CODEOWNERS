@@ -1,0 +1,5 @@
+# Rust reviewers
+*.rs @nc0fr
+
+# GraphQL API
+/graphql @realhinome
