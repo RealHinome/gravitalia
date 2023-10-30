@@ -1,0 +1,50 @@
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//front:nuxt/package_json.bzl", "bin")
+
+npm_link_all_packages(
+    name = "node_modules",
+)
+
+SRCS = [
+    "package.json",
+    "nuxt.config.ts",
+    #"pnpm-lock.yaml"
+]
+
+BUILD_DEPS = [":node_modules/" + d for d in [
+    "@pinia/nuxt",
+    "@nuxt/devtools",
+    "@nuxtjs/apollo",
+    "@nuxtjs/color-mode",
+    "@nuxtjs/i18n",
+    "@nuxtjs/tailwindcss",
+    "@unocss/nuxt",
+    "nuxt",
+    "pinia",
+]]
+
+#bin.nuxt_binary(
+#    name = "nuxt_js_binary",
+#    visibility = ["//visibility:public"],
+#)
+
+bin.nuxt(
+    name = "front",
+    args = [
+        "generate",
+        #"--buildDir=$@",
+    ],
+    srcs = SRCS + BUILD_DEPS + glob([
+        "assets/**",
+        "components/**/*.vue",
+        "middleware/*.ts",
+        "pages/**/*.vue",
+        "plugins/*.ts",
+        "static/*",
+        "store/*.ts",
+    ]),
+    visibility = ["//visibility:public"],
+    chdir = package_name(),
+    out_dirs = ["dist", ".output/public", ".nuxt"],
+)
