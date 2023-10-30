@@ -80,7 +80,7 @@ npm_translate_lock(
     npmrc = "//:.npmrc",
     pnpm_lock = "//:pnpm-lock.yaml",
     verify_node_modules_ignored = "//:.bazelignore",
-    prod = False,
+    dev = True,
 )
 
 load("@npm//:repositories.bzl", "npm_repositories")
