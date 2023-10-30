@@ -77,6 +77,7 @@ load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 
 npm_translate_lock(
     name = "npm",
+    npmrc = "@//:.npmrc",
     data = [
         "//front:package.json",
     ],
