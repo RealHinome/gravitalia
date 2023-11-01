@@ -9,40 +9,43 @@ npm_link_all_packages(
 SRCS = [
     "package.json",
     "nuxt.config.ts",
-    #"pnpm-lock.yaml"
+    "app.vue",
+    "tsconfig.json",
 ]
 
 BUILD_DEPS = [":node_modules/" + d for d in [
-    "@pinia/nuxt",
-    "@nuxt/devtools",
-    "@nuxtjs/apollo",
-    "@nuxtjs/color-mode",
-    "@nuxtjs/i18n",
-    "@nuxtjs/tailwindcss",
-    "@unocss/nuxt",
-    "nuxt",
-    "pinia",
-]]
+    #"@pinia/nuxt",
+    #"@nuxt/devtools",
+    #"@nuxtjs/apollo",
+    #"@nuxtjs/color-mode",
+    #"@nuxtjs/i18n",
+    #"@nuxtjs/tailwindcss",
+    #"@unocss/nuxt",
+    #"pinia",
 
-#bin.nuxt_binary(
-#    name = "nuxt_js_binary",
-#    visibility = ["//visibility:public"],
-#)
+    "@nuxt/devtools",
+    "nuxt",
+    "vue",
+    "vue-router",
+]]
 
 bin.nuxt(
     name = "front",
     args = [
         "generate",
-        #"--buildDir=$@",
     ],
     srcs = SRCS + BUILD_DEPS + glob([
         "assets/**",
         "components/**/*.vue",
+        "locales/*.json",
         "middleware/*.ts",
         "pages/**/*.vue",
         "plugins/*.ts",
+        "public/**",
         "static/*",
-        "store/*.ts",
+        "stores/*.ts",
+        "server/*.ts",
+        "types/*.ts"
     ]),
     visibility = ["//visibility:public"],
     chdir = package_name(),
