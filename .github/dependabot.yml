@@ -1,8 +1,20 @@
 version: 2
 updates:
+  - package-ecosystem: "npm"
+    directory: "/front"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "realhinome"
+    labels:
+      - "front"
+      - "dependencies"
   - package-ecosystem: "cargo"
     directory: "/graphql"
     schedule:
       interval: "daily"
     reviewers:
       - "realhinome"
+    labels:
+      - "graphql"
+      - "dependencies"
