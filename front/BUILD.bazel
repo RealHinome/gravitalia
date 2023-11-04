@@ -47,7 +47,7 @@ bin.nuxt(
         "server/*.ts",
         "types/*.ts"
     ]),
-    visibility = ["//visibility:public"],
+    visibility = ["//visibility:private"],
     chdir = package_name(),
     out_dirs = ["dist", ".output/public", ".nuxt"],
 )
