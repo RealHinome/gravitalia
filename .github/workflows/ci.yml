@@ -32,5 +32,5 @@ jobs:
       run: bazel build //graphql:graphql
       shell: bash
     - name: Run tests
-      run: bazel test //graphql:graphql
+      run: bazel test //graphql:graphql_test
       shell: bash
