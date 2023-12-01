@@ -1,7 +1,6 @@
 {
-  "name": "nuxt-app",
+  "name": "front",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -11,8 +10,16 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.8.0",
-    "vue": "^3.3.7",
-    "vue-router": "^4.2.5"
+    "@nuxt/kit": "^3.8.0",
+    "@nuxtjs/apollo": "5.0.0-alpha.7",
+    "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/i18n": "8.0.0-rc.5",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@unocss/nuxt": "^0.55.7",
+    "nuxt": "^3.8.0"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "pinia": "^2.1.7"
   }
 }
