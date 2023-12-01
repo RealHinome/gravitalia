@@ -28,6 +28,8 @@ jobs:
       with:
         path: "~/.cache/bazel"
         key: ${{ runner.os }}-bazel
+    - name: Install Node dependencies
+      run: pnpm install --no-frozen-lockfile
     - name: Update lockfile
       if: ${{ github.actor == 'dependabot[bot]' }}
       run: CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
@@ -37,8 +39,6 @@ jobs:
       if: ${{ github.actor == 'dependabot[bot]' && matrix.target == 'ubuntu-latest' }}
       with:
         commit_message: 'chore(deps): Update Bazel lockfile'
-    - name: Install Node dependencies
-      run: pnpm install --no-frozen-lockfile
     - name: Run builds
       run: bazel build //graphql:graphql
       shell: bash
