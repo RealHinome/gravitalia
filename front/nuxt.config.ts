@@ -93,15 +93,14 @@ export default defineNuxtConfig({
 
   routeRules: {
     // Static generation
-    "/": { prerender: true, experimentalNoScripts: true, },
-    "/test": { ssr: false }
+    "/": { prerender: true, experimentalNoScripts: true },
+    "/test": { prerender: true, ssr: false },
   },
 
   devtools: { enabled: true },
 
   nitro: {
     preset: "cloudflare",
-    compressPublicAssets: true
   },
 
   experimental: {
