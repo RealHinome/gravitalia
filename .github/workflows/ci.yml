@@ -39,6 +39,7 @@ jobs:
       if: ${{ github.actor == 'dependabot[bot]' && matrix.target == 'ubuntu-latest' }}
       with:
         commit_message: 'chore(deps): Update Bazel lockfile'
+        file_pattern: 'graphql/*.json'
     - name: Run builds
       run: bazel build //graphql:graphql
       shell: bash
