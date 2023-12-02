@@ -16,7 +16,7 @@ export default defineNuxtConfig({
         { property: "og:title", content: "Gravitalia" },
         { property: "og:image", content: "/favicon.webp" },
         { name: "og:description", content: "Gravitalia, let us connect you to the Christmas spirit! 🎅" },
-        { name: "theme-color", content: "#6d28d9" },
+        { name: "theme-color", content: "#CA2555" },
         { name: "robots", content: "index, follow" },
         { name: "twitter:card", content: "summary" },
         { name: "twitter:site", content: "@gravitalianews" },
