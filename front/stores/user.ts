@@ -10,9 +10,9 @@ const EMPTY_USER: User = {
     vanity: "",
     avatar: null,
     bio: null,
+    locale: null, // Only user locale on active user.
     followers: null,
     following: null,
-    verified: null,
     deleted: null,
     flags: null
 };
