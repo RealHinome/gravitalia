@@ -13,6 +13,6 @@ export default defineConfig({
         presetTypography(),
         presetMini({
             dark: "class"
-        })
-    ]
+        }),
+    ],
 });
