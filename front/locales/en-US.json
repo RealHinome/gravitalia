@@ -1,4 +1,10 @@
 {
-    "Hello {username}": "Hello {username}",
-    "You are not connected": "You are not connected"
+    "home": {
+        "introduce": "Introducing...",
+        "description": "Faster. Safer. Stronger."
+    },
+    "test": {
+        "hello": "Hello {username}",
+        "error": "You are not connected"
+    }
 }
