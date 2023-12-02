@@ -1,4 +1,4 @@
-import { isDevelopment } from 'std-env'
+import { isDevelopment } from 'std-env';
 
 export default defineNuxtConfig({
   app: {
@@ -28,7 +28,7 @@ export default defineNuxtConfig({
         { rel: "manifest", href: "/manifest.json" },
       ],
       script: [
-        { innerHTML: process.env.NODE_ENV !== "development" ? '"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js",{scope:"/"});' : "" },
+        { innerHTML: !isDevelopment ? '"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js",{scope:"/"});' : "" },
       ],
       bodyAttrs: {
         class: "dark:bg-zinc-900 dark:text-white font-sans",
@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     ["@nuxtjs/i18n", {
       defaultLocale: "en",
       strategy: "no_prefix",
-      lazy: false,
+      lazy: true,
       langDir: "locales",
       detectBrowserLanguage: {
         useCookie: true,
@@ -97,15 +97,16 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
-    // Static generation
-    "/": { prerender: true, experimentalNoScripts: true },
+    // No JS.
+    "/": { experimentalNoScripts: true },
+    // Static generation.
     "/test": { prerender: true, ssr: false },
   },
 
   devtools: { enabled: true },
 
   nitro: {
-    preset: "cloudflare",
+    preset: "cloudflare_pages",
   },
 
   experimental: {
@@ -119,10 +120,4 @@ export default defineNuxtConfig({
     defineModel: true,
     propsDestructure: true,
   },
-
-  postcss: {
-    plugins: {
-      'postcss-nested': {},
-    },
-  },
-})
+});

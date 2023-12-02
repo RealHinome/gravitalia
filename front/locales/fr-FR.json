@@ -1,4 +1,10 @@
 {
-    "Hello {username}": "Bonjour {username}",
-    "You are not connected": "Vous n'êtes pas connecté"
+    "home": {
+        "introduce": "Introduire...",
+        "description": "Rapide. Sécurisé. Fort."
+    },
+    "test": {
+        "hello": "Bonjour {username}",
+        "error": "Vous n'êtes pas connecté"
+    }
 }

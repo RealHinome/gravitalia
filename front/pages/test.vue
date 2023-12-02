@@ -8,6 +8,6 @@ await user.fetchMe(false);
 </script>
 
 <template>
-    <p v-if="user.username !== ''" text-2xl ml-4>{{ $t("Hello {username}", { username: user.username }) }}</p>
-    <p v-else text-red-500 ml-4>{{ $t("You are not connected") }}</p>
+    <p v-if="user.username !== ''" text-2xl ml-4>{{ $t("test.hello", { username: user.username }) }}</p>
+    <p v-else text-red-500 ml-4>{{ $t("test.error") }}</p>
 </template>

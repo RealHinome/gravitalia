@@ -9,17 +9,16 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxt/kit": "^3.8.0",
-    "@nuxtjs/apollo": "5.0.0-alpha.7",
-    "@nuxtjs/color-mode": "^3.3.0",
-    "@nuxtjs/i18n": "8.0.0-rc.5",
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "@unocss/nuxt": "^0.55.7",
-    "nuxt": "^3.8.0"
+    "@nuxt/devtools": "^1.0.4",
+    "@nuxt/kit": "^3.8.2",
+    "@nuxtjs/apollo": "5.0.0-alpha.10",
+    "@nuxtjs/color-mode": "^3.3.2",
+    "@nuxtjs/i18n": "8.0.0-rc.6",
+    "@unocss/nuxt": "^0.57.7",
+    "nuxt": "^3.8.2"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.11",
+    "@pinia/nuxt": "^0.5.1",
     "pinia": "^2.1.7"
   }
 }
