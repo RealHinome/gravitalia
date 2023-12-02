@@ -1,3 +1,5 @@
+import { isDevelopment } from 'std-env'
+
 export default defineNuxtConfig({
   app: {
     keepalive: true,
@@ -13,11 +15,12 @@ export default defineNuxtConfig({
         { property: "og:site_name", content: "Gravitalia" },
         { property: "og:title", content: "Gravitalia" },
         { property: "og:image", content: "/favicon.webp" },
-        { name: "theme-color", content: "#332b43" },
+        { name: "og:description", content: "Gravitalia, let us connect you to the Christmas spirit! 🎅" },
+        { name: "theme-color", content: "#6d28d9" },
         { name: "robots", content: "index, follow" },
         { name: "twitter:card", content: "summary" },
         { name: "twitter:site", content: "@gravitalianews" },
-        { name: "description", content: "Fast, safe and respectful are the watchwords of Gravitalia, so let us connect you!" }
+        { name: "description", content: "Gravitalia, let us connect you to the Christmas spirit! 🎅" },
       ],
       link: [
         { rel: "icon", type: "image/webp", href: "/favicon.webp" },
@@ -25,7 +28,7 @@ export default defineNuxtConfig({
         { rel: "manifest", href: "/manifest.json" },
       ],
       script: [
-        { innerHTML: process.env.NODE_ENV !== "development" ? '"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js",{scope:"/"});' : "" }
+        { innerHTML: process.env.NODE_ENV !== "development" ? '"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js",{scope:"/"});' : "" },
       ],
       bodyAttrs: {
         class: "dark:bg-zinc-900 dark:text-white font-sans",
@@ -36,6 +39,7 @@ export default defineNuxtConfig({
   ssr: true,
   components: true,
   spaLoadingTemplate: "pages/loading.html",
+  sourcemap: isDevelopment,
   
   modules: [
     "@pinia/nuxt",
@@ -88,7 +92,8 @@ export default defineNuxtConfig({
       classPrefix: "",
       classSuffix: "",
       storageKey: "mode"
-    }]
+    }],
+    "~/modules/purge-comments",
   ],
 
   routeRules: {
@@ -104,6 +109,20 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    headNext: true
-  }
+    headNext: true,
+    payloadExtraction: false,
+    inlineSSRStyles: false,
+    renderJsonPayloads: true,
+  },
+
+  vue: {
+    defineModel: true,
+    propsDestructure: true,
+  },
+
+  postcss: {
+    plugins: {
+      'postcss-nested': {},
+    },
+  },
 })
