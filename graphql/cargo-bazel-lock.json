@@ -1,5 +1,5 @@
 {
-  "checksum": "e4abb86f6c0bf2553a8fa53615d53992a413f74699953f786e6765abffb15ef4",
+  "checksum": "b9c89a6fb1e2b34cd5c91ac571d73ff666640a5f89413094386cb8e5a70f8251",
   "crates": {
     "addr2line 0.21.0": {
       "name": "addr2line",
@@ -7116,7 +7116,7 @@
               "target": "serde"
             },
             {
-              "id": "unsafe-libyaml 0.2.9",
+              "id": "unsafe-libyaml 0.2.10",
               "target": "unsafe_libyaml"
             }
           ],
@@ -8845,13 +8845,13 @@
       },
       "license": "MIT / Apache-2.0"
     },
-    "unsafe-libyaml 0.2.9": {
+    "unsafe-libyaml 0.2.10": {
       "name": "unsafe-libyaml",
-      "version": "0.2.9",
+      "version": "0.2.10",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/unsafe-libyaml/0.2.9/download",
-          "sha256": "f28467d3e1d3c6586d8f25fa243f544f5800fec42d97032474e17222c2b75cfa"
+          "url": "https://crates.io/api/v1/crates/unsafe-libyaml/0.2.10/download",
+          "sha256": "ab4c90930b95a82d00dc9e9ac071b4991924390d46cbd0dfe566148667605e4b"
         }
       },
       "targets": [
@@ -8871,7 +8871,7 @@
           "**"
         ],
         "edition": "2021",
-        "version": "0.2.9"
+        "version": "0.2.10"
       },
       "license": "MIT"
     },
