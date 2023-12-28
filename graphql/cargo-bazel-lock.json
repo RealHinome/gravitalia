@@ -1,5 +1,5 @@
 {
-  "checksum": "7a6f6d75ad7e9dcdbf81ee4e7ce7ac27537ef7b4f8e81737385a8fd7b0c67108",
+  "checksum": "06a37b5b763e98c98d1f6eb0ed3736625bdc4a1c501d9d2e8c402e6410110697",
   "crates": {
     "addr2line 0.21.0": {
       "name": "addr2line",
@@ -2817,7 +2817,7 @@
               "target": "log"
             },
             {
-              "id": "neo4rs 0.7.0",
+              "id": "neo4rs 0.7.1",
               "target": "neo4rs"
             },
             {
@@ -4780,13 +4780,13 @@
       },
       "license": "MIT"
     },
-    "neo4rs 0.7.0": {
+    "neo4rs 0.7.1": {
       "name": "neo4rs",
-      "version": "0.7.0",
+      "version": "0.7.1",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/neo4rs/0.7.0/download",
-          "sha256": "6162ef9b9790140b8d28f20d97d07fa61084ba8ada3f7f9173552d4327a24576"
+          "url": "https://crates.io/api/v1/crates/neo4rs/0.7.1/download",
+          "sha256": "b1013d61f78c55571b95f0f2bad58dce2f5a346227e21271e8e5641f4d8e5919"
         }
       },
       "targets": [
@@ -4884,7 +4884,7 @@
           ],
           "selects": {}
         },
-        "version": "0.7.0"
+        "version": "0.7.1"
       },
       "license": "MIT"
     },
