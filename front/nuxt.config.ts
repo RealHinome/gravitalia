@@ -23,8 +23,6 @@ export default defineNuxtConfig({
         { name: "description", content: "Gravitalia, let us connect you to the Christmas spirit! 🎅" },
       ],
       link: [
-        { rel: "icon", type: "image/webp", href: "/favicon.webp" },
-        { rel: 'apple-touch-icon', href: "/favicon.webp" },
         { rel: "manifest", href: "/manifest.json" },
       ],
       script: [
