@@ -1,5 +1,5 @@
 {
-  "checksum": "06a37b5b763e98c98d1f6eb0ed3736625bdc4a1c501d9d2e8c402e6410110697",
+  "checksum": "e71908911b43e56a9da313176fe41c9bfb2d96ae619fbd6cad8e9928fff93ecd",
   "crates": {
     "addr2line 0.21.0": {
       "name": "addr2line",
@@ -988,13 +988,13 @@
       },
       "license": "MIT OR Apache-2.0"
     },
-    "chrono-tz 0.8.4": {
+    "chrono-tz 0.8.5": {
       "name": "chrono-tz",
-      "version": "0.8.4",
+      "version": "0.8.5",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/chrono-tz/0.8.4/download",
-          "sha256": "e23185c0e21df6ed832a12e2bda87c7d1def6842881fb634a8511ced741b0d76"
+          "url": "https://crates.io/api/v1/crates/chrono-tz/0.8.5/download",
+          "sha256": "91d7b79e99bfaa0d47da0687c43aa3b7381938a62ad3a6498599039321f660b7"
         }
       },
       "targets": [
@@ -1036,7 +1036,7 @@
               "target": "chrono"
             },
             {
-              "id": "chrono-tz 0.8.4",
+              "id": "chrono-tz 0.8.5",
               "target": "build_script_build"
             },
             {
@@ -1047,7 +1047,7 @@
           "selects": {}
         },
         "edition": "2021",
-        "version": "0.8.4"
+        "version": "0.8.5"
       },
       "build_script_attrs": {
         "data_glob": [
@@ -4816,7 +4816,7 @@
               "target": "chrono"
             },
             {
-              "id": "chrono-tz 0.8.4",
+              "id": "chrono-tz 0.8.5",
               "target": "chrono_tz"
             },
             {
