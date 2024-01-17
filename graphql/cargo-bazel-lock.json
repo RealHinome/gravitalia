@@ -1,5 +1,5 @@
 {
-  "checksum": "e71908911b43e56a9da313176fe41c9bfb2d96ae619fbd6cad8e9928fff93ecd",
+  "checksum": "81bfc4a37d5e782e108319247d61c9e217bf21fa9f0bedca232fa295c56d5b72",
   "crates": {
     "addr2line 0.21.0": {
       "name": "addr2line",
@@ -2963,7 +2963,7 @@
               "target": "tokio_util"
             },
             {
-              "id": "tracing 0.1.39",
+              "id": "tracing 0.1.40",
               "target": "tracing"
             }
           ],
@@ -3498,7 +3498,7 @@
               "target": "tower_service"
             },
             {
-              "id": "tracing 0.1.39",
+              "id": "tracing 0.1.40",
               "target": "tracing"
             },
             {
@@ -9002,7 +9002,7 @@
               "target": "tokio"
             },
             {
-              "id": "tracing 0.1.39",
+              "id": "tracing 0.1.40",
               "target": "tracing"
             }
           ],
@@ -9043,13 +9043,13 @@
       },
       "license": "MIT"
     },
-    "tracing 0.1.39": {
+    "tracing 0.1.40": {
       "name": "tracing",
-      "version": "0.1.39",
+      "version": "0.1.40",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/tracing/0.1.39/download",
-          "sha256": "ee2ef2af84856a50c1d430afce2fdded0a4ec7eda868db86409b4543df0797f9"
+          "url": "https://crates.io/api/v1/crates/tracing/0.1.40/download",
+          "sha256": "c3523ab5a71916ccf420eebdf5521fcef02141234bbc0b8a49f2fdc4544364ef"
         }
       },
       "targets": [
@@ -9093,7 +9093,7 @@
           "selects": {}
         },
         "edition": "2018",
-        "version": "0.1.39"
+        "version": "0.1.40"
       },
       "license": "MIT"
     },
@@ -9964,7 +9964,7 @@
               "target": "tower_service"
             },
             {
-              "id": "tracing 0.1.39",
+              "id": "tracing 0.1.40",
               "target": "tracing"
             }
           ],
