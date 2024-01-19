@@ -1,5 +1,5 @@
 {
-  "checksum": "e71908911b43e56a9da313176fe41c9bfb2d96ae619fbd6cad8e9928fff93ecd",
+  "checksum": "6abef6e6b6fee881053515a19af572c2145848c51759eb644803ab402ef66868",
   "crates": {
     "addr2line 0.21.0": {
       "name": "addr2line",
@@ -2895,13 +2895,13 @@
       },
       "license": "MIT/Apache-2.0"
     },
-    "h2 0.3.21": {
+    "h2 0.3.24": {
       "name": "h2",
-      "version": "0.3.21",
+      "version": "0.3.24",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/h2/0.3.21/download",
-          "sha256": "91fc23aa11be92976ef4729127f1a74adf36d8436f7816b185d18df956790833"
+          "url": "https://crates.io/api/v1/crates/h2/0.3.24/download",
+          "sha256": "bb2c4422095b67ee78da96fbb51a4cc413b3b25883c7717ff7ca1ab31022c9c9"
         }
       },
       "targets": [
@@ -2947,7 +2947,7 @@
               "target": "http"
             },
             {
-              "id": "indexmap 1.9.3",
+              "id": "indexmap 2.0.2",
               "target": "indexmap"
             },
             {
@@ -2970,7 +2970,7 @@
           "selects": {}
         },
         "edition": "2018",
-        "version": "0.3.21"
+        "version": "0.3.24"
       },
       "license": "MIT"
     },
@@ -3458,7 +3458,7 @@
               "target": "futures_util"
             },
             {
-              "id": "h2 0.3.21",
+              "id": "h2 0.3.24",
               "target": "h2"
             },
             {
@@ -3738,8 +3738,7 @@
         "crate_features": {
           "common": [
             "serde",
-            "serde-1",
-            "std"
+            "serde-1"
           ],
           "selects": {}
         },
