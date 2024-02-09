@@ -1,0 +1,10 @@
+[package]
+name = "oauth2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ureq = { version = "2.9", features = ["json"] }
+serde = { version = "1", default-features = false, features = ["derive"] }
+base64 = "0.21"
+crypto = { git = "https://github.com/Gravitalia/Autha.git", package = "crypto" }
