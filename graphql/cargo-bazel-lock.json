@@ -1,5 +1,5 @@
 {
-  "checksum": "e71908911b43e56a9da313176fe41c9bfb2d96ae619fbd6cad8e9928fff93ecd",
+  "checksum": "23029b16e92601c5e5b8ec9f2c97072fb8cb8fe0c49237966965a8af40006f14",
   "crates": {
     "addr2line 0.21.0": {
       "name": "addr2line",
@@ -95,15 +95,6 @@
         "compile_data_glob": [
           "**"
         ],
-        "deps": {
-          "common": [
-            {
-              "id": "memchr 2.6.4",
-              "target": "memchr"
-            }
-          ],
-          "selects": {}
-        },
         "edition": "2021",
         "version": "1.1.2"
       },
@@ -988,13 +979,13 @@
       },
       "license": "MIT OR Apache-2.0"
     },
-    "chrono-tz 0.8.5": {
+    "chrono-tz 0.8.6": {
       "name": "chrono-tz",
-      "version": "0.8.5",
+      "version": "0.8.6",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/chrono-tz/0.8.5/download",
-          "sha256": "91d7b79e99bfaa0d47da0687c43aa3b7381938a62ad3a6498599039321f660b7"
+          "url": "https://crates.io/api/v1/crates/chrono-tz/0.8.6/download",
+          "sha256": "d59ae0466b83e838b81a54256c39d5d7c20b9d7daa10510a242d9b75abd5936e"
         }
       },
       "targets": [
@@ -1036,7 +1027,7 @@
               "target": "chrono"
             },
             {
-              "id": "chrono-tz 0.8.5",
+              "id": "chrono-tz 0.8.6",
               "target": "build_script_build"
             },
             {
@@ -1047,7 +1038,7 @@
           "selects": {}
         },
         "edition": "2021",
-        "version": "0.8.5"
+        "version": "0.8.6"
       },
       "build_script_attrs": {
         "data_glob": [
@@ -4611,13 +4602,13 @@
       },
       "license": "MIT OR Zlib OR Apache-2.0"
     },
-    "mio 0.8.10": {
+    "mio 0.8.11": {
       "name": "mio",
-      "version": "0.8.10",
+      "version": "0.8.11",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/mio/0.8.10/download",
-          "sha256": "8f3d0b296e374a4e6f3c7b0a1f5a51d748a0d34c85e7dc48fc3fa9a87657fe09"
+          "url": "https://crates.io/api/v1/crates/mio/0.8.11/download",
+          "sha256": "a4a650543ca06a924e8b371db273b2756685faae30f8487da1b56505a8f78b0c"
         }
       },
       "targets": [
@@ -4672,7 +4663,7 @@
           }
         },
         "edition": "2018",
-        "version": "0.8.10"
+        "version": "0.8.11"
       },
       "license": "MIT"
     },
@@ -4816,7 +4807,7 @@
               "target": "chrono"
             },
             {
-              "id": "chrono-tz 0.8.5",
+              "id": "chrono-tz 0.8.6",
               "target": "chrono_tz"
             },
             {
@@ -5500,7 +5491,7 @@
         "deps": {
           "common": [
             {
-              "id": "regex 1.10.2",
+              "id": "regex 1.10.3",
               "target": "regex"
             }
           ],
@@ -6754,13 +6745,13 @@
       },
       "license": "MIT"
     },
-    "regex 1.10.2": {
+    "regex 1.10.3": {
       "name": "regex",
-      "version": "1.10.2",
+      "version": "1.10.3",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/regex/1.10.2/download",
-          "sha256": "380b951a9c5e80ddfd6136919eef32310721aa4aacd4889a8d39124b026ab343"
+          "url": "https://crates.io/api/v1/crates/regex/1.10.3/download",
+          "sha256": "b62dbe01f0b06f9d8dc7d49e05a0785f153b00b2c227856282f671e0318c9b15"
         }
       },
       "targets": [
@@ -6789,7 +6780,7 @@
         "deps": {
           "common": [
             {
-              "id": "regex-automata 0.4.3",
+              "id": "regex-automata 0.4.6",
               "target": "regex_automata"
             },
             {
@@ -6800,17 +6791,17 @@
           "selects": {}
         },
         "edition": "2021",
-        "version": "1.10.2"
+        "version": "1.10.3"
       },
       "license": "MIT OR Apache-2.0"
     },
-    "regex-automata 0.4.3": {
+    "regex-automata 0.4.6": {
       "name": "regex-automata",
-      "version": "0.4.3",
+      "version": "0.4.6",
       "repository": {
         "Http": {
-          "url": "https://crates.io/api/v1/crates/regex-automata/0.4.3/download",
-          "sha256": "5f804c7828047e88b2d32e2d7fe5a105da8ee3264f01902f796c8e067dc2483f"
+          "url": "https://crates.io/api/v1/crates/regex-automata/0.4.6/download",
+          "sha256": "86b83b8b9847f9bf95ef68afb0b8e6cdb80f498442f5179a29fad448fcc1eaea"
         }
       },
       "targets": [
@@ -6852,7 +6843,7 @@
           "selects": {}
         },
         "edition": "2021",
-        "version": "0.4.3"
+        "version": "0.4.6"
       },
       "license": "MIT OR Apache-2.0"
     },
@@ -8672,7 +8663,7 @@
               "target": "bytes"
             },
             {
-              "id": "mio 0.8.10",
+              "id": "mio 0.8.11",
               "target": "mio"
             },
             {
